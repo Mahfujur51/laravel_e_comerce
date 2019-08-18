@@ -1,0 +1,14 @@
+.mt-top-20{
+	margin-top: 20px;
+}
+.product_img{
+ max-height: 200px;
+}
+.footer_buttom{
+	margin-top: 20px;
+	padding: 20px;
+	background: #00b2ae;
+}
+.bg-light{
+	background:#00b2ae!important;
+}
