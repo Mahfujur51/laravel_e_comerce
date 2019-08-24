@@ -3,17 +3,17 @@
 <div class="col-12 grid-margin stretch-card">
 	<div class="card">
 		<div class="card-body">
-			<h4 class="card-title">Add Category</h4>
+			<h4 class="card-title">Update Category</h4>
 			@include('admin.partials._message')
-			<form class="forms-sample" method="POST" action="{{route('admin.category.store')}}"  enctype="multipart/form-data">
+			<form class="forms-sample" method="POST" action="{{route('admin.category.update',$categories->id)}}"  enctype="multipart/form-data">
 				@csrf
 				<div class="form-group">
 					<label>Name</label>
-					<input type="text" class="form-control"  name="name" placeholder="Enter the Category Name ">
+                <input type="text" class="form-control"  name="name" value="{{$categories->name}}">
 				</div>
 				<div class="form-group">
 					<label >Description</label>
-					<textarea class="form-control"rows="4" name="description" placeholder="Enter The description"></textarea>
+                <textarea class="form-control"rows="4" name="description" >{{$categories->description}}</textarea>
 				</div>
 				
 				<div class="form-group">
@@ -24,7 +24,13 @@
                         @endforeach
                     </select>
                        
+                </div>
+                <div class="form-group">
+                    <label id="image">Old Image</label>
+                    <br>
+                        <img src="{{asset('images/category/'.$categories->image)}}" width="100" alt="image">
 				</div>
+                
 				<div class="form-group">
 					<label id="image">Upload Image</label>
 					
@@ -36,7 +42,7 @@
 				<br>
 
 				
-				<button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+				<button type="submit" class="btn btn-gradient-primary mr-2">Update Category</button>
 				<button class="btn btn-light">Cancel</button>
 			</form>
 		</div>

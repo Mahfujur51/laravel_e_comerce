@@ -8,37 +8,42 @@
 			<div class="col-lg-12 grid-margin stretch-card">
 				<div class="card">
 					<div class="card-body">
-
+					
 						<table class="table table-striped">
 							<thead>
 								<tr>
 									<th>Sl No</th>
-									<th>Name</th>
-									<th>Image</th>
-									<th>Parent Category</th>
-									<th>Action</th>
+                                    <th>Name</th>
+                                    <th>Image</th>
+                                    <th>Parent Name</th>
+                                    <th>Action</th>
 								</tr>
-							</thead>
-							<tbody>
-								@foreach ($category as $key=>$v_category)
-								<tr>
-									<td>{{$key+1}}</td>
-									<td>{{$v_category->name}}</td>
-									<td><img src="{{asset('images/category/'.$v_category->image)}}"  width="100"></td>
-									<td>
-										@if ($v_category->parent_id==NULL)
-										{{"Pimary Category"}}
-										@else
-										{{$v_category->parent->name}}
-										@endif	
-									</td>
-									
-									<td>
-										<a href="#exampleModal{{$v_category->id}}" class="btn btn-danger" type="button" class="btn btn-primary" data-toggle="modal" >Delete</a>
+                            </thead>
+                            @foreach ($categories as $category)
+                                
+                           
+                            <tr>
+                            <td>#</td>
+                            <td>{{$category->name}}</td>
+                            <td><img src="{{asset('images/category/'.$category->image)}}" alt="image"></td>
+                            <td>
+                                   @if ($category->parent_id==NULL)
+                                       Pimary Category
+                                   @else
+                                   {{$category->parent['name']}}    
+                                   @endif
+                    
+                                   
+
+
+                            </td>
+                            <td>
+                            <a href="{{route('admin.categories.edit',$category->id)}}" class="btn btn-success">Edit</a>
+                            <a href="#exampleModal{{$category->id}}" class="btn btn-danger" type="button" class="btn btn-primary" data-toggle="modal" >Delete</a>
 
 
 										<!-- Modal -->
-										<div class="modal fade" id="exampleModal{{$v_category->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal fade" id="exampleModal{{$category->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 											<div class="modal-dialog" role="document">
 												<div class="modal-content">
 													<div class="modal-header">
@@ -49,7 +54,7 @@
 													</div>
 													<div class="modal-body">
 														
-														<form action="{{ route('admin.product.delete',$v_category->id) }}" method="POST" accept-charset="utf-8">
+														<form action="{{ route('admin.category.delete',$category->id) }}" method="POST" accept-charset="utf-8">
 															@csrf
 															
 															<button type="submit" class="btn btn-danger">Delete</button>
@@ -63,17 +68,10 @@
 												</div>
 											</div>
 										</div>
-
-
-
-										<a href="{{ route('admin.category.edit',$v_category->id) }}" class="btn btn-success">Edit</a>
-									</td>
-									
-								</tr>
-								@endforeach
-
-
-							</tbody>
+                            </td>
+                            </tr>
+                             @endforeach
+							
 						</table>
 					</div>
 				</div>
